@@ -127,7 +127,7 @@
 
     // Dark Light Mode
     if($('.body').hasClass('is_dark')) {
-        if ($('#logo_header').length) {document.getElementById("logo_header").src = "assets/images/logo/logo_dark.png";}
+        if ($('#logo_header').length) {document.getElementById("logo_header").src = "assets/img/logo/home.png";}
         if ($('#img-mode').length) {document.getElementById("img-mode").src = "assets/images/icon/sun.png";}  
         if ($('#work-1').length) {document.getElementById("work-1").src = "assets/images/svg/work-1.svg";}
         if ($('#work-2').length) {document.getElementById("work-2").src = "assets/images/svg/work-2.svg";}
@@ -139,7 +139,7 @@
         if ($('#work-8').length) {document.getElementById("work-8").src = "assets/images/svg/work-8.svg";}
 
     } else  if($('.body').hasClass('is_light')) {
-        if ($('#logo_header').length) {document.getElementById("logo_header").src = "assets/images/logo/logo.png";}
+        if ($('#logo_header').length) {document.getElementById("logo_header").src = "assets/img/logo/home.png";}
         if ($('#img-mode').length) {document.getElementById("img-mode").src = "assets/images/icon/moon.png";} 
         if ($('#work-1').length) {document.getElementById("work-1").src = "assets/images/svg/work-1-light.svg";}
         if ($('#work-2').length) {document.getElementById("work-2").src = "assets/images/svg/work-2-light.svg";}
