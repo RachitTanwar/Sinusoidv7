@@ -353,3 +353,26 @@
     });
 
 })(jQuery);
+
+// Get all the card elements
+const cards = document.querySelectorAll('.card');
+
+// Add click event listener to each card
+cards.forEach(card => {
+  let count = 0;
+  const image = card.querySelector('.image img');
+  const content = card.querySelector('.content');
+  const href = image.parentElement.getAttribute('data-href');
+
+  image.addEventListener('click', (event) => {
+    event.preventDefault(); // Prevent the default link behavior
+
+    count++;
+    if (count === 1) {
+      content.style.visibility = 'visible'; // Show content on first click
+      content.style.opacity = '1';
+    } else if (count === 2) {
+      window.location.href = href; // Navigate to the specified URL on second click
+    }
+  });
+});
