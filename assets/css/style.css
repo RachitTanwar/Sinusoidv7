@@ -1093,10 +1093,10 @@ a:hover, a:focus {
   --bg-section2: #040B11;
   --bg-section3: url(../images/background/bs-section.jpg);
 }
-
+/* 
 #page {
   overflow: hidden;
-}
+} */
 
 /* Header
 -------------------------------------------------------------- */
@@ -1232,7 +1232,7 @@ header.absolute {
   background-color: var(--primary-color8);
   z-index: 9999;
   opacity: 0;
-  visibility: hidden;
+  /* visibility: hidden; */
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
@@ -1249,7 +1249,7 @@ header.absolute {
   left: 105%;
   top: 0%;
   opacity: 0 !important;
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 #main-nav .sub-menu .sub-menu::before {
   display: none;
@@ -1584,7 +1584,7 @@ header.absolute {
   background: var(--primary-color6);
   -webkit-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
-  visibility: hidden;
+  /* visibility: hidden; */
   opacity: 0;
   -webkit-transform: translateY(-1rem);
   transform: translateY(-1rem);
@@ -1814,7 +1814,7 @@ header.absolute {
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   opacity: 0;
-  visibility: hidden;
+  /* visibility: hidden; */
   cursor: pointer;
   overflow: hidden;
   z-index: 9999;
@@ -2853,7 +2853,7 @@ header.absolute {
   -webkit-transform: translatex(-50%) translatey(-50%);
           transform: translatex(-50%) translatey(-50%);
   opacity: 0;
-  visibility: hidden;
+  /* visibility: hidden; */
   -webkit-transition: 0.3s;
   transition: 0.3s;
   z-index: 9;
@@ -2936,7 +2936,7 @@ header.absolute {
   padding: 10px 15px;
   color: #111;
   text-align: center;
-  visibility: hidden;
+  /* visibility: hidden; */
   opacity: 0;
   transition: 0.3s ease-in-out;
   max-height: 0;
