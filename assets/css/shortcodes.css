@@ -2792,7 +2792,7 @@
 }
 .vertical-carousel:hover::after, .vertical-carousel:hover::before {
   opacity: 0;
-  /* visibility: hidden; */
+  visibility: hidden;
 }
 .vertical-carousel .content-slide {
   display: flex;

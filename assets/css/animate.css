@@ -1576,7 +1576,7 @@
   }
 
   to {
-    /* visibility: hidden; */
+    visibility: hidden;
     transform: translate3d(0, 100%, 0);
   }
 }
@@ -1591,7 +1591,7 @@
   }
 
   to {
-    /* visibility: hidden; */
+    visibility: hidden;
     transform: translate3d(-100%, 0, 0);
   }
 }
@@ -1606,7 +1606,7 @@
   }
 
   to {
-    /* visibility: hidden; */
+    visibility: hidden;
     transform: translate3d(100%, 0, 0);
   }
 }
@@ -1621,7 +1621,7 @@
   }
 
   to {
-    /* visibility: hidden; */
+    visibility: hidden;
     transform: translate3d(0, -100%, 0);
   }
 }
