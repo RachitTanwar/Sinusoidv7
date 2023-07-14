@@ -265,20 +265,20 @@ xtype
   background-color: #aebcb9;
 }
 .animationtext.type .cd-words-wrapper.selected::after {
-  /* visibility: hidden; */
+  visibility: hidden;
 }
 .animationtext.type .cd-words-wrapper.selected .item-text {
   color: #0d0d0d;
 }
 .animationtext.type .item-text {
-  /* visibility: hidden; */
+  visibility: hidden;
 }
 .animationtext.type .item-text.is-visible {
   visibility: visible;
 }
 .animationtext.type i {
   position: absolute;
-  /* visibility: hidden; */
+  visibility: hidden;
 }
 .animationtext.type i.in {
   position: relative;
