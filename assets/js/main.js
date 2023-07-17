@@ -353,8 +353,6 @@
     });
 
 })(jQuery);
-
-// Get all the card elements
 const cards = document.querySelectorAll('.card');
 
 // Add click event listener to each card
@@ -380,7 +378,7 @@ cards.forEach(card => {
     }
   });
 });
-  
+
 window.requestAnimFrame = function () {
     return (
       window.requestAnimationFrame ||

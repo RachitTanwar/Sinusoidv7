@@ -2975,3 +2975,11 @@ header.absolute {
   line-height: 4rem;
 } */
 
+
+
+.container .card.expanded .content {
+  max-height: 1000px; /* Change this value to accommodate your content */
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0.2s;
+}
