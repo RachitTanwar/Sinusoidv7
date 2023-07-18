@@ -197,7 +197,7 @@
   .tf-slider-item .content-inner .heading,
 .tf-slider-item .content-inner .sub-heading {
     max-width: 100%;
-    font-size: xx-large;
+    font-size: larger;
   }
   .tf-slider-item.style-3 {
     padding: 100px 0;
