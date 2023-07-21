@@ -2983,3 +2983,9 @@ header.absolute {
   opacity: 1;
   transition-delay: 0.2s;
 }
+
+@media screen and (max-width:700px) {
+  .main-heading {
+    margin-top: 150px;
+  }
+}
