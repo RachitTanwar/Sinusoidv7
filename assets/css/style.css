@@ -2990,3 +2990,7 @@ header.absolute {
     margin-top: 150px;
   }
 }
+
+#align-center {
+  margin:auto;
+}
