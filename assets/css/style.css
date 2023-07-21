@@ -2239,6 +2239,7 @@ header.absolute {
 }
 .tf-blog .tf-blog-item {
   box-sizing: border-box;
+  height: 97%;
   padding: 30px 20px 28px;
   background: var(--primary-color8);
   margin-bottom: 30px;
