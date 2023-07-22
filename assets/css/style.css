@@ -2990,3 +2990,10 @@ header.absolute {
     margin-top: 150px;
   }
 }
+
+@media screen and (min-width:768px){
+  #title-sponsor{
+    display: flex;
+    align-items: center;
+  }
+}
