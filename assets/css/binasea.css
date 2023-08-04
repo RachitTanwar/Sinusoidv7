@@ -4,7 +4,11 @@
     src:  url('../font/binasea.eot') format('embedded-opentype'),
       url('../font/binasea.ttf') format('truetype'),
       url('../font/binasea.woff') format('woff'),
-      url('../font/binasea.svg') format('svg');
+      url('../font/binasea.svg') format('svg'),
+      url('../font/fa-brands-400.eot') format('embedded-opentype'),
+      url('../font/fa-brands-400.ttf') format('truetype'),
+      url('../font/fa-brands-400.woff') format('woff'),
+      url('../font/fa-brands-400.svg') format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: block;
