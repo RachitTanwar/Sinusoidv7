@@ -641,36 +641,96 @@ window.requestAnimFrame = function () {
     loop();
     setInterval(loop, 1000 / 60);
   };
-  
 
-  function addPlayer() {
-    const playersContainer = document.getElementById("players-container");
-    const playerNumber = playersContainer.children.length + 1;
-  
+
+  //Register
+  const maxPlayers = {
+    BGMI: 5,
+    Valorant: 6,
+    Minecraft: 5
+};
+
+function updatePlayerDetailsSection() {
+    // ... (your updated JavaScript code for player details) ...
+}
+
+function addPlayer() {
+const selectedGames = document.querySelectorAll('input[name="game"]:checked');
+const playersContainer = document.getElementById("players-container");
+
+selectedGames.forEach(game => {
+const gameValue = game.value;
+const currentPlayerCount = playersContainer.querySelectorAll(`.${gameValue.toLowerCase()}-player`).length;
+const maxPlayersForGame = maxPlayers[gameValue] || 0;
+
+if (currentPlayerCount < maxPlayersForGame) {
+    const playerNumber = currentPlayerCount + 1;
+
     const playerDiv = document.createElement("div");
-    playerDiv.className = "player";
-  
+    playerDiv.className = "player " + gameValue.toLowerCase() + "-player";
+
     const playerName = document.createElement("input");
     playerName.type = "text";
-    playerName.placeholder = "Player " + playerNumber + " Name";
-    playerName.name = "player_name_" + playerNumber;
-  
+    playerName.placeholder = gameValue + " Player " + playerNumber + " Name";
+    playerName.name = gameValue.toLowerCase() + "_player_" + playerNumber;
+
     const isCaptainLabel = document.createElement("label");
     isCaptainLabel.innerHTML = "Captain:";
-    
+
     const isCaptain = document.createElement("input");
     isCaptain.type = "radio";
-    isCaptain.name = "captain";
+    isCaptain.name = gameValue.toLowerCase() + "_captain";
     isCaptain.value = playerNumber;
-  
+
     playerDiv.appendChild(playerName);
     playerDiv.appendChild(isCaptainLabel);
     playerDiv.appendChild(isCaptain);
-  
+
     playersContainer.appendChild(playerDiv);
+}
+});
+}
+
+
+function submitForm() {
+  var submitButton = document.querySelector('input[type="submit"]');
+  submitButton.disabled = true;
+  submitButton.value = 'Submitting...';
+
+  var scriptURL = 'https://script.google.com/macros/s/AKfycbx0XJnPkz2U3bGM-VNi8iALRaZsWZd03i9RAU_uq-nUGfmkC8a3kgCYHc7-6Kv_UhbNXA/exec';
+  var form = document.forms['application-form'];
+
+  var formData = new FormData(form);
+
+  // Create an object to store form data with headers
+  var formDataObj = {};
+
+  // Loop through form elements and map to formDataObj
+  for (const [key, value] of formData.entries()) {
+      formDataObj[key] = value;
   }
-  
-  // function submitForm() {
-  //   // Collect and process form data here
-  //   alert("Form submitted!");
-  // }
+
+  // Convert formDataObj to JSON and add it to FormData
+  formData.append('formData', JSON.stringify(formDataObj));
+
+  fetch(scriptURL, { method: 'POST', body: formData })
+      .then(response => {
+          if (response.ok) {
+              console.log('Form submitted successfully');
+              window.location.href = 'successful.html';  // Redirect to success page
+          } else {
+              console.error('Form submission failed');
+          }
+      })
+      .catch(error => {
+          console.error('Error!', error);
+      })
+      .finally(() => {
+          submitButton.disabled = false;
+          submitButton.value = 'Submit';
+      });
+}
+
+
+// Call updatePlayerDetailsSection() initially to set the initial state
+updatePlayerDetailsSection();

@@ -103,17 +103,17 @@
                 </div>
             </section>
 
-            <section class="tf-contact ">
+            <section class="tf-contact">
                 <div class="tf-container">
                     <div class="row justify-content-center">
                         <div class="col-xl-6 col-lg-8 col-md-9">
                             <div class="tf-heading">
-                                <h2 class="heading">Respawn Registeration</h2>
+                                <h2 class="heading">Event Registration</h2>
                             </div>
                             <form name="application-form" onsubmit="submitForm(); return false;">
                                 <label for="team-name" class="mt-3 mb-3">Team Name:</label>
                                 <input type="text" id="team-name" name="team_name" required><br>
-                              
+                                
                                 <h2>Leader's Personal Details</h2>
                                 <label for="leader-name" class="mt-3 mb-3">Leader's Name:</label>
                                 <input type="text" id="leader-name" name="leader_name" required><br>
@@ -123,43 +123,52 @@
                                 
                                 <label for="leader-phone" class="mt-3 mb-3">Leader's Phone:</label>
                                 <input type="tel" pattern="[1-9]{1}[0-9]{9}" id="leader-phone" name="leader_phone" required><br>
-                              
-                                <h2>Players</h2>
-                                <div id="players-container">
-                                  <div class="player">
-                                    <input type="text" placeholder="Player 1 Name" name="player_name_1" required class="mb-3">
-                                    <label for="player1-captain" class="mt-3 mb-3">Leader:</label>
-                                    <input type="radio" id="player1-captain" name="captain" value="1">
-                                  </div>
-                                </div>
-                                <button type="button" onclick="addPlayer()" class="mt-3 mb-3">Add Player</button><br>
-                              
+                                
                                 <h2 class="mt-4 mb-2">Select Games</h2>
                                 <div class="form-check">
-                                    <input class="form-check-input" name="BGMI" type="checkbox" value="BGMI">
-                                    <label class="form-check-label text-white" for="BGMI">
-                                        BGMI
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input class="form-check-input" name="Minecraft" type="checkbox" value="Minecraft">
-                                    <label class="form-check-label text-white" for="Minecraft">
-                                        Minecraft
-                                    </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input class="form-check-input" name="Valorant" type="checkbox" value="Valorant">
-                                    <label class="form-check-label text-white" for="Valorant">
-                                        Valorant
-                                    </label>
-                                  </div>
-                                  <input type="submit" onclick="submitForm(); this.disabled=true; this.value='Submitting...';" class="btn btn-primary">
-                              </form>
+                                    <input class="form-check-input" name="game" type="checkbox" value="BGMI">
+                                    <label class="form-check-label text-white" for="BGMI">BGMI</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" name="game" type="checkbox" value="Minecraft">
+                                    <label class="form-check-label text-white" for="Minecraft">Minecraft</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" name="game" type="checkbox" value="Valorant">
+                                    <label class="form-check-label text-white" for="Valorant">Valorant</label>
+                                </div>
+                                <div id="players-container">
+                                    <!-- Player details will be dynamically added here based on selected games -->
+                                    <!-- For BGMI game -->
+                                    <div class="player-details bgmi-player">
+                                        <input type="text" name="BGMI_player[]" placeholder="BGMI Player 1 Name">
+                                        <label for="BGMI_captain">Captain:</label>
+                                        <input type="radio" name="BGMI_captain" value="1">
+                                    </div>
+                                    <!-- For Minecraft game -->
+                                    <div class="player-details minecraft-player">
+                                        <input type="text" name="Minecraft_player[]" placeholder="Minecraft Player 1 Name">
+                                        <label for="Minecraft_captain">Captain:</label>
+                                        <input type="radio" name="Minecraft_captain" value="1">
+                                    </div>
+                                    <!-- For Valorant game -->
+                                    <div class="player-details valorant-player">
+                                        <input type="text" name="Valorant_player[]" placeholder="Valorant Player 1 Name">
+                                        <label for="Valorant_captain">Captain:</label>
+                                        <input type="radio" name="Valorant_captain" value="1">
+                                    </div>
+                                </div>
+                                
+        
+                                <button type="button" id="add-player-button" onclick="addPlayer()" class="mt-3 mb-3">Add Player</button><br>
+                                
+                                <input type="submit" onclick="submitForm(); this.disabled=true; this.value='Submitting...';" class="btn btn-primary">
+                            </form>
                         </div>
                     </div>
                 </div>
             </section>
-
+        
             <!-- Footer -->
             <footer class="footer">
                 <div class="footer-inner">
@@ -298,34 +307,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-   function submitForm() {
-    var submitButton = document.querySelector('input[type="submit"]');
-    submitButton.disabled = true;
-    submitButton.value = 'Submitting...';
-
-    var scriptURL = 'https://script.google.com/macros/s/AKfycbx0XJnPkz2U3bGM-VNi8iALRaZsWZd03i9RAU_uq-nUGfmkC8a3kgCYHc7-6Kv_UhbNXA/exec';
-    var form = document.forms['application-form'];
-
-    fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-        .then(response => {
-            if (response.ok) {
-                console.log('Form submitted successfully');
-                window.location.href = 'successful.html';  // Redirect to success page
-            } else {
-                console.error('Form submission failed');
-            }
-        })
-        .catch(error => {
-            console.error('Error!', error);
-        })
-        .finally(() => {
-            submitButton.disabled = false;
-            submitButton.value = 'Submit';
-        });
-}
-      </script>
 
     <!-- Javascript -->
 
