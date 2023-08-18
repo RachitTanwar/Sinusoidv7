@@ -44,21 +44,23 @@
                <!-- <input type="text" name="data[yesno_meet]" required> -->
                <div class="underline"></div>
                <label for="">Do you want to meet Team SouL?</label>
-               <!-- <input type="radio" name="data[meet_req]" value="Yes" required>Yes<br />
-               <input type="radio" name="data[meet_req]" value="No" required>No<br /> -->
                <!-- <div class="underline"></div> -->
-               
+            </div>
+            <div class="input-data">
+            <div id="radio-input">
+               <input type="radio" name="data[meet_req]" value="Yes" id="answer-yes" required>Yes
+               <input type="radio" name="data[meet_req]" value="No" required>No
+            </div>
             </div>
          </div>
-         <div class="form-row">
+         <div class="form-row" id="show">
             <div class="input-data">
-               <input type="text" name="data[intrest_req]" required>
+               <input type="text" name="data[interest_req]" required>
                <div class="underline"></div>
                <label for="">Interested in paying for event?</label>
             </div>
          </div>
-         <div class="form-row">
-            
+         <div class="form-row" id="show">
          <div class="input-data textarea">
             <input type="number" name="data[amount]" min="10" max="5000" required>
             <br />
@@ -98,7 +100,10 @@
    });
    function myFunction() {
       document.getElementById("sheetdb-form").reset();
-    }
+    };
+    if(document.getElementById("answer_yes").checked) {
+      document.getElementById("show").style.display ="flex";
+    };
  </script>
 
 </body>

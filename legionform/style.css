@@ -57,6 +57,16 @@ form .form-row .textarea{
   font-size: 17px;
   border-bottom: 2px solid rgba(0,0,0, 0.12);
 }
+.input-data #radio-input{
+  display:flex;
+  width:50%;
+  margin-top: 15px;
+  font-size: 17px;
+}
+
+#show{
+  display: none;
+}
 .input-data input:focus ~ label, .textarea textarea:focus ~ label,
 .input-data input:valid ~ label, .textarea textarea:valid ~ label{
   transform: translateY(-20px);
