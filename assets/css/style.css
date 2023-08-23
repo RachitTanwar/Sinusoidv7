@@ -2997,3 +2997,67 @@ header.absolute {
     align-items: center;
   }
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.default{ cursor: default; }
+
+.container {
+    /* background: #f9f9f9; */
+    margin: 2px;
+}
+
+.flex-column {
+    max-width: 260px;
+}
+
+img {
+    margin: 5px;
+    border-radius: 8px;
+    cursor: default;
+}
+
+.scale {
+    transform: scaleY(1.05);
+    padding-top: 5px; 
+}
+
+.imgcard {
+    /* width: 580px; */
+    /* aspect-ratio: 2 / 3; */
+    display:flex ;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    /* border: 0.25rem solid rgb(255 255 255 / 15%); */
+    border-radius: 8px;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  
+  .imgcard > img {  
+    margin: 0px !important;
+    /* height: 100%;
+    width: 100%; */
+    object-fit: cover;
+    border-radius: inherit;
+  }
+  
+  .imgcard:hover > img {
+    animation: pulse 800ms ease-in-out;
+    
+  }
+
+@keyframes pulse {
+    from, to {
+      scale: 1;
+      filter: url(#imgnoise);
+    }
+    
+    50% {
+      scale: 1.08;
+      filter: url(#imgnoise);
+    }
+  }
