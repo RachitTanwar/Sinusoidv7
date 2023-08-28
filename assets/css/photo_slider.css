@@ -13,20 +13,20 @@
 }
 .gallery{
 position:absolute;
-top: 15vh;
-width:300px;
-height:200px;
+top: 22vh;
+width: 450px;
+height: 300px;
 transform-style:preserve-3d;
 animation:rotate 35s linear infinite;
 }
 
 @keyframes rotate{
 from{
-  transform:perspective(1200px) rotateY(0deg);
+  transform:perspective(1400px) rotateY(0deg);
 }
 
 to{
-  transform:perspective(1200px) rotateY(360deg);
+  transform:perspective(1400px) rotateY(360deg);
 }
 }
 
@@ -36,7 +36,7 @@ width:100%;
 height:100%;
 transform-origin:center;
 transform-style:preserve-3d;
-transform:rotateY(calc(var(--i) * 45deg)) translateZ(380px);
+transform:rotateY(calc(var(--i) * 45deg)) translateZ(580px);
 }
 
 .gallery span img{
