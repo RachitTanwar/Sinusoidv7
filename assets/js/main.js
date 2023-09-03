@@ -691,46 +691,5 @@ if (currentPlayerCount < maxPlayersForGame) {
 });
 }
 
-
-function submitForm() {
-  var submitButton = document.querySelector('input[type="submit"]');
-  submitButton.disabled = true;
-  submitButton.value = 'Submitting...';
-
-  var scriptURL = 'https://script.google.com/macros/s/AKfycby8-EbotWN4jmWe_79WEMiGLzFWonemqUEpUesnh7Z5iMsV9MIz5YP26AIOUETBdYIN/exec';
-  var form = document.forms['application-form'];
-
-  var formData = new FormData(form);
-
-  // Create an object to store form data with headers
-  var formDataObj = {};
-
-  // Loop through form elements and map to formDataObj
-  for (const [key, value] of formData.entries()) {
-      formDataObj[key] = value;
-  }
-
-  // Convert formDataObj to JSON and add it to FormData
-  formData.append('formData', JSON.stringify(formDataObj));
-
-  fetch(scriptURL, { method: 'POST', body: formData })
-      .then(response => {
-          if (response.ok) {
-              console.log('Form submitted successfully');
-              window.location.href = 'thank_you.html';  // Redirect to success page
-          } else {
-              console.error('Form submission failed');
-          }
-      })
-      .catch(error => {
-          console.error('Error!', error);
-      })
-      .finally(() => {
-          submitButton.disabled = false;
-          submitButton.value = 'Submit';
-      });
-}
-
-
 // Call updatePlayerDetailsSection() initially to set the initial state
 updatePlayerDetailsSection();
