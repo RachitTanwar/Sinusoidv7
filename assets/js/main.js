@@ -697,7 +697,7 @@ function submitForm() {
   submitButton.disabled = true;
   submitButton.value = 'Submitting...';
 
-  var scriptURL = 'https://script.google.com/macros/s/AKfycbx0XJnPkz2U3bGM-VNi8iALRaZsWZd03i9RAU_uq-nUGfmkC8a3kgCYHc7-6Kv_UhbNXA/exec';
+  var scriptURL = 'https://script.google.com/macros/s/AKfycby8-EbotWN4jmWe_79WEMiGLzFWonemqUEpUesnh7Z5iMsV9MIz5YP26AIOUETBdYIN/exec';
   var form = document.forms['application-form'];
 
   var formData = new FormData(form);
@@ -717,7 +717,7 @@ function submitForm() {
       .then(response => {
           if (response.ok) {
               console.log('Form submitted successfully');
-              window.location.href = 'successful.html';  // Redirect to success page
+              window.location.href = 'thank_you.html';  // Redirect to success page
           } else {
               console.error('Form submission failed');
           }

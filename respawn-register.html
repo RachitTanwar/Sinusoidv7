@@ -24,7 +24,17 @@
     <!-- Favicon and Touch Icons  -->
     <link rel="shortcut icon" href="assets/icon/favicon_io/favicon.ico">
     <link rel="apple-touch-icon-precomposed" href="assets/icon/favicon_io/favicon.ico">
+    <style>
+        .tile {
+            text-align: center;
+            cursor: pointer;
+        }
 
+        .tile img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 
 <body class="body header-fixed">
@@ -103,7 +113,37 @@
                 </div>
             </section>
 
-            <section class="tf-contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="tile" onclick="window.location.href='respawn/valorant.html'">
+                            <img src="assets/img/banner/2twisted.jpg" alt="Tile 1">
+                            <h3>Tile 1</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="tile" onclick="window.location.href='index.html'">
+                            <img src="assets/img/banner/2twisted.jpg" alt="Tile 2">
+                            <h3>Tile 2</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="tile" onclick="window.location.href='index.html'">
+                            <img src="assets/img/banner/2twisted.jpg" alt="Tile 3">
+                            <h3>Tile 3</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="tile" onclick="window.location.href='index.html'">
+                            <img src="assets/img/banner/2twisted.jpg" alt="Tile 4">
+                            <h3>Tile 4</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <section class="tf-contact">
                 <div class="tf-container">
                     <div class="row justify-content-center">
                         <div class="col-xl-6 col-lg-8 col-md-9">
@@ -138,7 +178,6 @@
                                     <label class="form-check-label text-white" for="Valorant">Valorant</label>
                                 </div>
                                 <div id="players-container">
-                                    <!-- Player details will be dynamically added here based on selected games -->
                                 </div>
                                 
         
@@ -149,7 +188,7 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
         
             <!-- Footer -->
             <footer class="footer">
