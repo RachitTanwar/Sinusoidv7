@@ -643,11 +643,13 @@ window.requestAnimFrame = function () {
   };
 
 
-  //Register
+ 
+
   const maxPlayers = {
     BGMI: 5,
     Valorant: 6,
-    Minecraft: 5
+    Minecraft: 5,
+    CODM: 6, // Add CODM with a maximum of 6 players
 };
 
 function updatePlayerDetailsSection() {
@@ -655,41 +657,82 @@ function updatePlayerDetailsSection() {
 }
 
 function addPlayer() {
-const selectedGames = document.querySelectorAll('input[name="game"]:checked');
-const playersContainer = document.getElementById("players-container");
+  const selectedGames = document.querySelectorAll('input[name="game"]:checked');
+  const gameColumns = document.getElementById("game-columns");
 
-selectedGames.forEach(game => {
-const gameValue = game.value;
-const currentPlayerCount = playersContainer.querySelectorAll(`.${gameValue.toLowerCase()}-player`).length;
-const maxPlayersForGame = maxPlayers[gameValue] || 0;
+  // Clear existing columns
+  gameColumns.innerHTML = '';
 
-if (currentPlayerCount < maxPlayersForGame) {
-    const playerNumber = currentPlayerCount + 1;
+  selectedGames.forEach(game => {
+    const gameValue = game.value;
+    const maxPlayersForGame = maxPlayers[gameValue] || 0;
 
-    const playerDiv = document.createElement("div");
-    playerDiv.className = "player " + gameValue.toLowerCase() + "-player";
+    const gameColumn = document.createElement("div");
+    gameColumn.className = "game-column";
 
-    const playerName = document.createElement("input");
-    playerName.type = "text";
-    playerName.placeholder = gameValue + " Player " + playerNumber + " Name";
-    playerName.name = gameValue.toLowerCase() + "_player_" + playerNumber;
+    const gameHeader = document.createElement("h3");
+    gameHeader.textContent = gameValue;
 
-    const isCaptainLabel = document.createElement("label");
-    isCaptainLabel.innerHTML = "Captain:";
+    gameColumn.appendChild(gameHeader);
 
-    const isCaptain = document.createElement("input");
-    isCaptain.type = "radio";
-    isCaptain.name = gameValue.toLowerCase() + "_captain";
-    isCaptain.value = playerNumber;
+    for (let i = 1; i <= maxPlayersForGame; i++) {
+      const playerDiv = document.createElement("div");
+      playerDiv.className = "player " + gameValue.toLowerCase() + "-player";
 
-    playerDiv.appendChild(playerName);
-    playerDiv.appendChild(isCaptainLabel);
-    playerDiv.appendChild(isCaptain);
+      const playerName = document.createElement("input");
+      playerName.type = "text";
+      playerName.placeholder = gameValue + " Player " + i + " Name";
+      playerName.name = gameValue.toLowerCase() + "_player_" + i;
+      playerName.style.marginBottom = "10px"; // Add spacing between player name input fields
 
-    playersContainer.appendChild(playerDiv);
+      playerDiv.appendChild(playerName);
+
+      gameColumn.appendChild(playerDiv);
+    }
+
+    gameColumns.appendChild(gameColumn);
+  });
 }
-});
+
+function submitForm() {
+  var submitButton = document.querySelector('input[type="submit"]');
+  submitButton.disabled = true;
+  submitButton.value = 'Submitting...';
+
+  var scriptURL = 'https://script.google.com/macros/s/AKfycbx0XJnPkz2U3bGM-VNi8iALRaZsWZd03i9RAU_uq-nUGfmkC8a3kgCYHc7-6Kv_UhbNXA/exec';
+  var form = document.forms['application-form'];
+
+  var formData = new FormData(form);
+
+  // Create an object to store form data with headers
+  var formDataObj = {};
+
+  // Loop through form elements and map to formDataObj
+  for (const [key, value] of formData.entries()) {
+      formDataObj[key] = value;
+  }
+
+  // Convert formDataObj to JSON and add it to FormData
+  formData.append('formData', JSON.stringify(formDataObj));
+
+  fetch(scriptURL, { method: 'POST', body: formData })
+      .then(response => {
+          if (response.ok) {
+              console.log('Form submitted successfully');
+              window.location.href = 'successful.html';  // Redirect to success page
+          } else {
+              console.error('Form submission failed');
+          }
+      })
+      .catch(error => {
+          console.error('Error!', error);
+      })
+      .finally(() => {
+          submitButton.disabled = false;
+          submitButton.value = 'Submit';
+      });
 }
+
 
 // Call updatePlayerDetailsSection() initially to set the initial state
 updatePlayerDetailsSection();
