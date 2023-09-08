@@ -644,56 +644,63 @@ window.requestAnimFrame = function () {
 
 
  
-
   const maxPlayers = {
     BGMI: 5,
     Valorant: 6,
     Minecraft: 5,
     CODM: 6, // Add CODM with a maximum of 6 players
-};
-
-function updatePlayerDetailsSection() {
-    // ... (your updated JavaScript code for player details) ...
-}
-
-function addPlayer() {
-  const selectedGames = document.querySelectorAll('input[name="game"]:checked');
-  const gameColumns = document.getElementById("game-columns");
-
-  // Clear existing columns
-  gameColumns.innerHTML = '';
-
-  selectedGames.forEach(game => {
-    const gameValue = game.value;
-    const maxPlayersForGame = maxPlayers[gameValue] || 0;
-
-    const gameColumn = document.createElement("div");
-    gameColumn.className = "game-column";
-
-    const gameHeader = document.createElement("h3");
-    gameHeader.textContent = gameValue;
-
-    gameColumn.appendChild(gameHeader);
-
-    for (let i = 1; i <= maxPlayersForGame; i++) {
-      const playerDiv = document.createElement("div");
-      playerDiv.className = "player " + gameValue.toLowerCase() + "-player";
-
-      const playerName = document.createElement("input");
-      playerName.type = "text";
-      playerName.placeholder = gameValue + " Player " + i + " Name";
-      playerName.name = gameValue.toLowerCase() + "_player_" + i;
-      playerName.required = true; // Make player name required
-      playerName.style.marginBottom = "10px"; // Add spacing between input fields
-
-      playerDiv.appendChild(playerName);
-
-      gameColumn.appendChild(playerDiv);
-    }
-
-    gameColumns.appendChild(gameColumn);
-  });
-}
+  };
+  
+  const addPlayerButton = document.getElementById("add-player-button");
+  const submitButton = document.getElementById("submit-button");
+  submitButton.disabled = true;
+  
+  addPlayerButton.addEventListener("click", addPlayer);
+  
+  function addPlayer() {
+    const selectedGames = document.querySelectorAll('input[name="game"]:checked');
+    const gameColumns = document.getElementById("game-columns");
+  
+    // Clear existing columns
+    gameColumns.innerHTML = '';
+  
+    let playersAdded = false; // Flag to track if any players have been added
+  
+    selectedGames.forEach(game => {
+      const gameValue = game.value;
+      const maxPlayersForGame = maxPlayers[gameValue] || 0;
+  
+      const gameColumn = document.createElement("div");
+      gameColumn.className = "game-column";
+  
+      const gameHeader = document.createElement("h3");
+      gameHeader.textContent = gameValue;
+  
+      gameColumn.appendChild(gameHeader);
+  
+      for (let i = 1; i <= maxPlayersForGame; i++) {
+        const playerDiv = document.createElement("div");
+        playerDiv.className = "player " + gameValue.toLowerCase() + "-player";
+  
+        const playerName = document.createElement("input");
+        playerName.type = "text";
+        playerName.placeholder = gameValue + " Player " + i + " Name";
+        playerName.name = gameValue.toLowerCase() + "_player_" + i;
+        playerName.required = true; // Make player name required
+        playerName.style.marginBottom = "10px"; // Add spacing between input fields
+  
+        playerDiv.appendChild(playerName);
+  
+        gameColumn.appendChild(playerDiv);
+        playersAdded = true; // Set the flag to true if players are added
+      }
+  
+      gameColumns.appendChild(gameColumn);
+    });
+  
+    // Enable submit button only if players are added
+    submitButton.disabled = !playersAdded;
+  }
 
 function submitForm() {
   var submitButton = document.querySelector('input[type="submit"]');
