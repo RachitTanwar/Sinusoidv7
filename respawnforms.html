@@ -145,7 +145,7 @@
                                 </div>
                               </div>
                       
-                            <form name="application-form" onsubmit="submitForm(); return false;">
+                              <form name="application-form" onsubmit="submitForm(); return false;">
                                 <label for="team-name" class="mt-3 mb-3">Team Name:</label>
                                 <input type="text" id="team-name" name="team_name" required><br>
                                 
@@ -161,19 +161,19 @@
                                 
                                 <h2 class="mt-4 mb-2">Select Games</h2>
                                 <div class="form-check">
-                                    <input class="form-check-input" name="game" type="checkbox" value="BGMI">
+                                    <input class="form-check-input" name="game" type="checkbox" value="BGMI" required>
                                     <label class="form-check-label text-white" for="BGMI">BGMI</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" name="game" type="checkbox" value="Minecraft">
+                                    <input class="form-check-input" name="game" type="checkbox" value="Minecraft" required>
                                     <label class="form-check-label text-white" for="Minecraft">Minecraft</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" name="game" type="checkbox" value="Valorant">
+                                    <input class="form-check-input" name="game" type="checkbox" value="Valorant" required>
                                     <label class="form-check-label text-white" for="Valorant">Valorant</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" name="game" type="checkbox" value="CODM">
+                                    <input class="form-check-input" name="game" type="checkbox" value="CODM" required>
                                     <label class="form-check-label text-white" for="CODM">CODM</label>
                                 </div>
                                 
@@ -183,9 +183,10 @@
                                 
                                  <div id="game-columns"></div> <!-- Add this line here -->
         
-                                <button type="button" id="add-player-button" onclick="addPlayer()" class="mt-3 mb-3">Add Player</button><br>
+                                 <button type="button" id="add-player-button" onclick="addPlayer()" class="mt-3 mb-3">Add Player</button><br>
+
                                 
-                                <input type="submit" onclick="submitForm(); this.disabled=true; this.value='Submitting...';" class="btn btn-primary">
+                                <input type="submit" required onclick="submitForm(); this.disabled=true; this.value='Submitting...';" class="btn btn-primary">
                             </form>
                         </div>
                     </div>
@@ -336,6 +337,7 @@
 
     <!-- Javascript -->
 
+    
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.easing.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>

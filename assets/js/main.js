@@ -683,7 +683,8 @@ function addPlayer() {
       playerName.type = "text";
       playerName.placeholder = gameValue + " Player " + i + " Name";
       playerName.name = gameValue.toLowerCase() + "_player_" + i;
-      playerName.style.marginBottom = "10px"; // Add spacing between player name input fields
+      playerName.required = true; // Make player name required
+      playerName.style.marginBottom = "10px"; // Add spacing between input fields
 
       playerDiv.appendChild(playerName);
 
@@ -699,6 +700,13 @@ function submitForm() {
   submitButton.disabled = true;
   submitButton.value = 'Submitting...';
 
+  // Perform form validation before submitting
+  if (!validateForm()) {
+    submitButton.disabled = false;
+    submitButton.value = 'Submit';
+    return;
+  }
+
   var scriptURL = 'https://script.google.com/macros/s/AKfycbx0XJnPkz2U3bGM-VNi8iALRaZsWZd03i9RAU_uq-nUGfmkC8a3kgCYHc7-6Kv_UhbNXA/exec';
   var form = document.forms['application-form'];
 
@@ -709,29 +717,67 @@ function submitForm() {
 
   // Loop through form elements and map to formDataObj
   for (const [key, value] of formData.entries()) {
-      formDataObj[key] = value;
+    formDataObj[key] = value;
   }
 
   // Convert formDataObj to JSON and add it to FormData
   formData.append('formData', JSON.stringify(formDataObj));
 
   fetch(scriptURL, { method: 'POST', body: formData })
-      .then(response => {
-          if (response.ok) {
-              console.log('Form submitted successfully');
-              window.location.href = 'successful.html';  // Redirect to success page
-          } else {
-              console.error('Form submission failed');
-          }
-      })
-      .catch(error => {
-          console.error('Error!', error);
-      })
-      .finally(() => {
-          submitButton.disabled = false;
-          submitButton.value = 'Submit';
-      });
+    .then(response => {
+      if (response.ok) {
+        console.log('Form submitted successfully');
+        window.location.href = 'successful.html';  // Redirect to success page
+      } else {
+        console.error('Form submission failed');
+      }
+    })
+    .catch(error => {
+      console.error('Error!', error);
+    })
+    .finally(() => {
+      submitButton.disabled = false;
+      submitButton.value = 'Submit';
+    });
 }
+function validateForm() {
+  const form = document.forms['application-form'];
+  const selectedGames = form.querySelectorAll('input[name="game"]:checked');
+  
+  // Check if at least one game is selected
+  if (selectedGames.length === 0) {
+    alert("Please select at least one game.");
+    return false;
+  }
+  
+  // Check if all player details are filled for each selected game
+  for (const game of selectedGames) {
+    const gameValue = game.value;
+    const playerCount = form.querySelectorAll(`[name^="${gameValue.toLowerCase()}_player_"]`).length;
+    
+    for (let i = 1; i <= playerCount; i++) {
+      const playerName = form.querySelector(`[name="${gameValue.toLowerCase()}_player_${i}"]`);
+      if (!playerName || !playerName.value.trim()) {
+        alert(`Please fill in player names for ${gameValue}.`);
+        return false;
+      }
+    }
+  }
+  
+  // Check if all other required fields are filled
+  const requiredInputs = form.querySelectorAll('[required]');
+  for (const input of requiredInputs) {
+    if (!input.value.trim()) {
+      alert("Please fill in all required fields.");
+      return false;
+    }
+  }
+
+  // If all conditions are met, you can proceed with form submission
+  return true;
+}
+
+
 
 
 // Call updatePlayerDetailsSection() initially to set the initial state
