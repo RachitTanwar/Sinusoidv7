@@ -642,8 +642,6 @@ window.requestAnimFrame = function () {
     setInterval(loop, 1000 / 60);
   };
 
-
- 
   const maxPlayers = {
     BGMI: 5,
     Valorant: 6,
@@ -653,6 +651,11 @@ window.requestAnimFrame = function () {
   
   const addPlayerButton = document.getElementById("add-player-button");
   const submitButton = document.getElementById("submit-button");
+  const teamNameInput = document.getElementById("team-name");
+  const leaderNameInput = document.getElementById("leader-name");
+  const leaderEmailInput = document.getElementById("leader-email");
+  const leaderPhoneInput = document.getElementById("leader-phone");
+  
   submitButton.disabled = true;
   
   addPlayerButton.addEventListener("click", addPlayer);
@@ -698,8 +701,18 @@ window.requestAnimFrame = function () {
       gameColumns.appendChild(gameColumn);
     });
   
-    // Enable submit button only if players are added
-    submitButton.disabled = !playersAdded;
+    // Enable submit button only if players are added and leader/team details are filled
+    submitButton.disabled = !playersAdded || !validateForm();
+  }
+  
+  function validateForm() {
+    // Check if leader/team details are filled
+    return (
+      teamNameInput.value.trim() !== "" &&
+      leaderNameInput.value.trim() !== "" &&
+      leaderEmailInput.value.trim() !== "" &&
+      leaderPhoneInput.value.trim() !== ""
+    );
   }
 
 function submitForm() {
@@ -779,13 +792,8 @@ function validateForm() {
       return false;
     }
   }
-
   // If all conditions are met, you can proceed with form submission
   return true;
 }
-
-
-
-
 // Call updatePlayerDetailsSection() initially to set the initial state
 updatePlayerDetailsSection();
