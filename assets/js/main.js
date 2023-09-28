@@ -641,91 +641,11 @@ window.requestAnimFrame = function () {
     loop();
     setInterval(loop, 1000 / 60);
   };
-
-  const maxPlayers = {
-    BGMI: 5,
-    Valorant: 6,
-    Minecraft: 5,
-    CODM: 6, // Add CODM with a maximum of 6 players
-  };
   
-  const addPlayerButton = document.getElementById("add-player-button");
-  const submitButton = document.getElementById("submit-button");
-  const teamNameInput = document.getElementById("team-name");
-  const leaderNameInput = document.getElementById("leader-name");
-  const leaderEmailInput = document.getElementById("leader-email");
-  const leaderPhoneInput = document.getElementById("leader-phone");
-  
-  submitButton.disabled = true;
-  
-  addPlayerButton.addEventListener("click", addPlayer);
-  
-  function addPlayer() {
-    const selectedGames = document.querySelectorAll('input[name="game"]:checked');
-    const gameColumns = document.getElementById("game-columns");
-  
-    // Clear existing columns
-    gameColumns.innerHTML = '';
-  
-    let playersAdded = false; // Flag to track if any players have been added
-  
-    selectedGames.forEach(game => {
-      const gameValue = game.value;
-      const maxPlayersForGame = maxPlayers[gameValue] || 0;
-  
-      const gameColumn = document.createElement("div");
-      gameColumn.className = "game-column";
-  
-      const gameHeader = document.createElement("h3");
-      gameHeader.textContent = gameValue;
-  
-      gameColumn.appendChild(gameHeader);
-  
-      for (let i = 1; i <= maxPlayersForGame; i++) {
-        const playerDiv = document.createElement("div");
-        playerDiv.className = "player " + gameValue.toLowerCase() + "-player";
-  
-        const playerName = document.createElement("input");
-        playerName.type = "text";
-        playerName.placeholder = gameValue + " Player " + i + " Name";
-        playerName.name = gameValue.toLowerCase() + "_player_" + i;
-        playerName.required = true; // Make player name required
-        playerName.style.marginBottom = "10px"; // Add spacing between input fields
-  
-        playerDiv.appendChild(playerName);
-  
-        gameColumn.appendChild(playerDiv);
-        playersAdded = true; // Set the flag to true if players are added
-      }
-  
-      gameColumns.appendChild(gameColumn);
-    });
-  
-    // Enable submit button only if players are added and leader/team details are filled
-    submitButton.disabled = !playersAdded || !validateForm();
-  }
-  
-  function validateForm() {
-    // Check if leader/team details are filled
-    return (
-      teamNameInput.value.trim() !== "" &&
-      leaderNameInput.value.trim() !== "" &&
-      leaderEmailInput.value.trim() !== "" &&
-      leaderPhoneInput.value.trim() !== ""
-    );
-  }
-
 function submitForm() {
   var submitButton = document.querySelector('input[type="submit"]');
   submitButton.disabled = true;
   submitButton.value = 'Submitting...';
-
-  // Perform form validation before submitting
-  if (!validateForm()) {
-    submitButton.disabled = false;
-    submitButton.value = 'Submit';
-    return;
-  }
 
   var scriptURL = 'https://script.google.com/macros/s/AKfycbx0XJnPkz2U3bGM-VNi8iALRaZsWZd03i9RAU_uq-nUGfmkC8a3kgCYHc7-6Kv_UhbNXA/exec';
   var form = document.forms['application-form'];
@@ -760,40 +680,3 @@ function submitForm() {
       submitButton.value = 'Submit';
     });
 }
-function validateForm() {
-  const form = document.forms['application-form'];
-  const selectedGames = form.querySelectorAll('input[name="game"]:checked');
-  
-  // Check if at least one game is selected
-  if (selectedGames.length === 0) {
-    alert("Please select at least one game.");
-    return false;
-  }
-  
-  // Check if all player details are filled for each selected game
-  for (const game of selectedGames) {
-    const gameValue = game.value;
-    const playerCount = form.querySelectorAll(`[name^="${gameValue.toLowerCase()}_player_"]`).length;
-    
-    for (let i = 1; i <= playerCount; i++) {
-      const playerName = form.querySelector(`[name="${gameValue.toLowerCase()}_player_${i}"]`);
-      if (!playerName || !playerName.value.trim()) {
-        alert(`Please fill in player names for ${gameValue}.`);
-        return false;
-      }
-    }
-  }
-  
-  // Check if all other required fields are filled
-  const requiredInputs = form.querySelectorAll('[required]');
-  for (const input of requiredInputs) {
-    if (!input.value.trim()) {
-      alert("Please fill in all required fields.");
-      return false;
-    }
-  }
-  // If all conditions are met, you can proceed with form submission
-  return true;
-}
-// Call updatePlayerDetailsSection() initially to set the initial state
-updatePlayerDetailsSection();
