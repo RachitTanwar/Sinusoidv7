@@ -171,45 +171,23 @@
                     </div>
                     <br><br>
 
-                    <section class="tf-contact">
-                        <div class="tf-container">
-                            <div class="row justify-content-center">
-                                <div class="col-xl-6 col-lg-8 col-md-9">
-                                    <div class="tf-heading">
-                                        <h2 class="heading">Fest Registration</h2>
-                                    </div>
-                                    <form method="POST" id="application-form">
-                                        <input type="hidden" name="sheetNumber" value="10">
-                                        <input type="text" class="form-control" placeholder="Name" aria-label="Name"
-                                            name="full_name" required>
-                                        <br>
-                                        <input type="tel" pattern="[1-9]{1}[0-9]{9}" class="form-control"
-                                            placeholder="Phone Number" aria-label="Phone Number" name="phone" required>
-                                        <br>
-                                        <input type="email" class="form-control" placeholder="Email" aria-label="Email"
-                                            name="email" required>
-                                        <br>
-
-                                        <input type="text" class="form-control" placeholder="University"
-                                            aria-label="University" name="university" required>
-                                        <br>
-                                        <input type="text" class="form-control"
-                                            placeholder="University or Government Id Number:"
-                                            aria-label="University or Government Id Number" name="id" required>
-                                        <br>
-
-                                        <input type="text" class="form-control"
-                                            placeholder="Name on the payment platform:"
-                                            aria-label="Name on the payment platform" name="payment_name" required>
-                                        <br>
-                                        <input type="submit" required
-                                            onclick="submitForm(); this.disabled=true; this.value='Submitting...';"
-                                            class="btn btn-primary">
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                    <form method="POST" id="application-form" onsubmit="return submitForm(event);">
+                        <input type="hidden" name="sheetNumber" value="10">
+                        <input type="text" class="form-control" placeholder="Name" aria-label="Name" name="full_name" required>
+                        <br>
+                        <input type="tel" pattern="[1-9]{1}[0-9]{9}" class="form-control" placeholder="Phone Number" aria-label="Phone Number" name="phone" required>
+                        <br>
+                        <input type="email" class="form-control" placeholder="Email" aria-label="Email" name="email" required>
+                        <br>
+                        <input type="text" class="form-control" placeholder="University" aria-label="University" name="university" required>
+                        <br>
+                        <input type="text" class="form-control" placeholder="University or Government ID Number:" aria-label="University or Government ID Number" name="id" required>
+                        <br>
+                        <input type="text" class="form-control" placeholder="Name on the payment platform:" aria-label="Name on the payment platform" name="payment_name" required>
+                        <br>
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </form>
+                    
 
                     <!-- Footer -->
                     <footer class="footer">
@@ -355,48 +333,53 @@
         <!-- Javascript -->
 
         <script>
-            function submitForm() {
-                // Get the form element
-                var form = document.forms['application-form'];
-
-                // Extract the sheet number from the hidden input field
+            function submitForm(event) {
+                event.preventDefault(); // Prevent the default form submission
+        
+                var form = document.getElementById('application-form');
                 var sheetNumber = form.elements['sheetNumber'].value;
-
-                // URL of your Google Apps Script web app
-                var scriptURL = 'https://script.google.com/macros/s/AKfycbzPGY-DQcOpLDCKIZ4AaqRRGA1QuamCijj5bpESvJWGX0SD-3g1X0bMzaejf1xnG8Rzlg/exec'; // Replace with your script URL
-
-                // Create a new FormData object to collect form data
-                var formData = new FormData(form);
-
-                // Create an object to store form data with headers
-                var formDataObj = {};
-
-                // Loop through form elements and map to formDataObj
-                for (const [key, value] of formData.entries()) {
-                    formDataObj[key] = value;
+                var scriptURL = 'https://script.google.com/macros/s/AKfycbzPGY-DQcOpLDCKIZ4AaqRRGA1QuamCijj5bpESvJWGX0SD-3g1X0bMzaejf1xnG8Rzlg/exec';
+        
+                // Check if all required fields have been filled
+                var isValid = true;
+                var requiredInputs = form.querySelectorAll('[required]');
+                for (var i = 0; i < requiredInputs.length; i++) {
+                    if (requiredInputs[i].value.trim() === '') {
+                        isValid = false;
+                        break;
+                    }
                 }
-
-                // Add the sheet number to the form data
-                formDataObj['sheetNumber'] = sheetNumber;
-
-                // Convert formDataObj to JSON and add it to FormData
-                formData.append('formData', JSON.stringify(formDataObj));
-
+        
+                if (!isValid) {
+                    alert('Please fill in all the required fields.');
+                    return false; // Prevent form submission
+                }
+        
+                // Disable the submit button and change its text
+                var submitButton = form.querySelector('input[type="submit"]');
+                submitButton.disabled = true;
+                submitButton.value = 'Submitting...';
+        
+                // Rest of your code to submit the form
+                // ...
+        
                 // Send a POST request to your Google Apps Script web app
+                var formData = new FormData(form);
                 fetch(scriptURL, { method: 'POST', body: formData })
                     .then(response => {
                         if (response.ok) {
                             console.log('Form submitted successfully');
-                            window.location.href = 'successfulreg.html';  // Redirect to success page
+                            window.location.href = 'successful.html'; // Redirect to success page
                         } else {
                             console.error('Form submission failed');
                         }
                     })
                     .catch(error => {
                         console.error('Error!', error);
-                    })
-            };
-        </script>
+                    });
+            }
+        </script>        
+        
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/js/jquery.easing.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
