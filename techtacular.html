@@ -162,40 +162,27 @@
                                     <div class="tf-heading">
                                         <h2 class="heading">TechTacular Registration</h2>
                                     </div>
-                                    <form action="javascript:void(0);" method="POST" id="application-form">
-                                        <input type="hidden" name="sheetNumber" value="6">
-                                        <label for="tname" class="mt-3 mb-3">Team Name:</label>
-                                        <input type="text" id="tname" name="tname" required><br>
-
-                                        <label for="tlname" class="mt-3 mb-3">Team Leader Name:</label>
-                                        <input type="text" id="tlname" name="tlname" required><br>
-
-                                        <label for="tlphone" class="mt-3 mb-3">Team Leader's Phone:</label>
-                                        <input type="tel" pattern="[1-9]{1}[0-9]{9}" id="tlphone" name="tlphone"
-                                            required><br>
-
-                                        <label for="tlemail" class="mt-3 mb-3">Team Leader's Email:</label>
-                                        <input type="email" id="tlemail" name="tlemail" required><br>
-
-                                        <label for="university" class="mt-3 mb-3">University Name:</label>
-                                        <input type="text" id="university" name="university" required><br>
-
-                                        <label for="projectname" class="mt-3 mb-3">Project Name:</label>
-                                        <input type="text" id="projectname" name="projectname" required><br>
-
-                                        <label for="tlname" class="mt-3 mb-3">1st Member Name:</label>
-                                        <input type="text" id="tlname" name="name1" required><br>
-                                        <label for="tlname" class="mt-3 mb-3">2nd Member Name:</label>
-                                        <input type="text" id="tlname" name="name2" required><br>
-                                        <label for="tlname" class="mt-3 mb-3">3rd Member Name:</label>
-                                        <input type="text" id="tlname" name="name3" required><br>
-                                        <label for="tlname" class="mt-3 mb-3">4th Member Name:</label>
-                                        <input type="text" id="tlname" name="name4" required><br>
-
+                                    <form method="POST" id="application-form" onsubmit="return submitForm(event);">
+                                        <input type="hidden" name="sheetNumber" value="3">
+                                        <input type="text" class="mt-3 mb-3" placeholder="Name" aria-label="Name" name="full_name" required>
                                         <br>
-                                        <input type="submit" required
-                                        onclick="submitForm(); this.disabled=true; this.value='Submitting...';"
-                                        class="btn btn-primary">
+                                        <input type="tel" pattern="[1-9]{1}[0-9]{9}" class="form-control" placeholder="Phone Number" aria-label="Phone Number" name="phone" required>
+                                        <br>
+                                        <input type="email" class="mt-3 mb-3" placeholder="Email" aria-label="Email" name="email" required>
+                                        <br>
+                                        <input type="text" class="mt-3 mb-3" placeholder="University" aria-label="University" name="university" required>
+                                        <br>
+                                        <input type="text" class="mt-3 mb-3" placeholder="1st member" aria-label="Name" name="full_name" required>
+                                        <input type="text" class="mt-3 mb-3" placeholder="2nd member" aria-label="Name" name="full_name" required>
+                                        <input type="text" class="mt-3 mb-3" placeholder="3rd member" aria-label="Name" name="full_name" required>
+                                        <input type="text" class="mt-3 mb-3" placeholder="4th member" aria-label="Name" name="full_name" required>
+                                        <input type="text" class="mt-3 mb-3" placeholder="5th member" aria-label="Name" name="full_name" required>
+                                        <input type="text" class="mt-3 mb-3" placeholder="6th member" aria-label="Name" name="full_name" required>
+                                        <input type="checkbox" id="terms" name="terms" value="term" required>
+                                        <label for="vehicle1">I accept <a href="/assets/terms_and_condition.pdf">Terms and Conditions</a></label><br>
+                                        <br>
+                                        <input type="submit" class="btn btn-primary" value="Submit">
+                                        <br>
                                     </form>
                                 </div>
                             </div>
@@ -344,47 +331,51 @@
     <!-- Javascript -->
 
     <script>
-        function submitForm() {
-  // Get the form element
-  var form = document.forms['application-form'];
-
-  // Extract the sheet number from the hidden input field
-  var sheetNumber = form.elements['sheetNumber'].value;
-
-  // URL of your Google Apps Script web app
-  var scriptURL = 'https://script.google.com/macros/s/AKfycbzPGY-DQcOpLDCKIZ4AaqRRGA1QuamCijj5bpESvJWGX0SD-3g1X0bMzaejf1xnG8Rzlg/exec'; // Replace with your script URL
-
-  // Create a new FormData object to collect form data
-  var formData = new FormData(form);
-
-  // Create an object to store form data with headers
-  var formDataObj = {};
-
-  // Loop through form elements and map to formDataObj
-  for (const [key, value] of formData.entries()) {
-    formDataObj[key] = value;
-  }
-
-  // Add the sheet number to the form data
-  formDataObj['sheetNumber'] = sheetNumber;
-
-  // Convert formDataObj to JSON and add it to FormData
-  formData.append('formData', JSON.stringify(formDataObj));
-
-  // Send a POST request to your Google Apps Script web app
-  fetch(scriptURL, { method: 'POST', body: formData })
-    .then(response => {
-      if (response.ok) {
-        console.log('Form submitted successfully');
-        window.location.href = 'successful.html';  // Redirect to success page
-      } else {
-        console.error('Form submission failed');
-      }
-    })
-    .catch(error => {
-      console.error('Error!', error);
-    })
-};
+        function submitForm(event) {
+            event.preventDefault(); // Prevent the default form submission
+    
+            var form = document.getElementById('application-form');
+            var sheetNumber = form.elements['sheetNumber'].value;
+            var scriptURL = 'https://script.google.com/macros/s/AKfycbzPGY-DQcOpLDCKIZ4AaqRRGA1QuamCijj5bpESvJWGX0SD-3g1X0bMzaejf1xnG8Rzlg/exec';
+    
+            // Check if all required fields have been filled
+            var isValid = true;
+            var requiredInputs = form.querySelectorAll('[required]');
+            for (var i = 0; i < requiredInputs.length; i++) {
+                if (requiredInputs[i].value.trim() === '') {
+                    isValid = false;
+                    break;
+                }
+            }
+    
+            if (!isValid) {
+                alert('Please fill in all the required fields.');
+                return false; // Prevent form submission
+            }
+    
+            // Disable the submit button and change its text
+            var submitButton = form.querySelector('input[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.value = 'Submitting...';
+    
+            // Rest of your code to submit the form
+            // ...
+    
+            // Send a POST request to your Google Apps Script web app
+            var formData = new FormData(form);
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Form submitted successfully');
+                        window.location.href = 'successful.html'; // Redirect to success page
+                    } else {
+                        console.error('Form submission failed');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error!', error);
+                });
+        }
     </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.easing.js"></script>
