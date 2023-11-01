@@ -164,20 +164,24 @@
                                     
                                     <form method="POST" id="application-form" onsubmit="return submitForm(event);">
                                         <input type="hidden" name="sheetNumber" value="3">
-                                        <input type="text" class="mt-3 mb-3" placeholder="Name" aria-label="Name" name="name" required>
+                                        <input type="text" class="mt-3 mb-3" placeholder="Name" aria-label="Name" name="tlname" required>
                                         <br>
-                                        <input type="tel" pattern="[1-9]{1}[0-9]{9}" class="form-control" placeholder="Phone Number" aria-label="Phone Number" name="phone" required>
+                                        <input type="text" class="mt-3 mb-3" placeholder="Team Name" aria-label="Team Name" name="tname" required>
                                         <br>
-                                        <input type="email" class="mt-3 mb-3" placeholder="Email" aria-label="Email" name="email" required>
+                                        <input type="tel" pattern="[1-9]{1}[0-9]{9}" class="form-control" placeholder="Phone Number" aria-label="Phone Number" name="tlphone" required>
+                                        <br>
+                                        <input type="email" class="mt-3 mb-3" placeholder="Email" aria-label="Email" name="tlemail" required>
                                         <br>
                                         <input type="text" class="mt-3 mb-3" placeholder="University" aria-label="University" name="university" required>
                                         <br>
+                                        <input type="text" class="mt-3 mb-3" placeholder="Project Name" aria-label="Project Name" name="projectname" required>
+                                        <br>
                                         <input type="text" class="mt-3 mb-3" placeholder="1st member" aria-label="Name" name="name1" required>
-                                        <input type="text" class="mt-3 mb-3" placeholder="2nd member" aria-label="Name" name="name2" required>
-                                        <input type="text" class="mt-3 mb-3" placeholder="3rd member" aria-label="Name" name="name3" required>
-                                        <input type="text" class="mt-3 mb-3" placeholder="4th member" aria-label="Name" name="name4" required>
-                                        <input type="text" class="mt-3 mb-3" placeholder="5th member" aria-label="Name" name="name5" required>
-                                        <input type="text" class="mt-3 mb-3" placeholder="6th member" aria-label="Name" name="name6" required>
+                                        <input type="text" class="mt-3 mb-3" placeholder="2nd member" aria-label="Name" name="name2" >
+                                        <input type="text" class="mt-3 mb-3" placeholder="3rd member" aria-label="Name" name="name3" >
+                                        <input type="text" class="mt-3 mb-3" placeholder="4th member" aria-label="Name" name="name4" >
+                                        <input type="text" class="mt-3 mb-3" placeholder="5th member" aria-label="Name" name="name5" >
+                                        <input type="text" class="mt-3 mb-3" placeholder="6th member" aria-label="Name" name="name6" >
                                         <input type="checkbox" id="terms" name="terms" value="term" required>
                                         <label for="vehicle1">I accept <a href="/assets/terms_and_condition.pdf">Terms and Conditions</a></label><br>
                                         <br>
