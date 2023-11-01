@@ -2265,7 +2265,7 @@
         left: 0;
         width: 100%;
         height: 5px;
-        background: var(--product-color16);
+        background: linear-gradient(180deg, #27AE60 0%, #27AE60 100%);
         z-index: -1;
     }
     &::before {
